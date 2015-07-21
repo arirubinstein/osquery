@@ -195,6 +195,10 @@ function main() {
     if [ $CLEAN == true ]; then
         echo "$POSTINSTALL_CLEAN_TEXT" >> $POSTINSTALL
     fi
+    if [ $AUTOSTART == true ]; then
+      # Install the normal post install reload to reload daemons.
+      echo "$POSTINSTALL_AUTOSTART_TEXT" >> $POSTINSTALL
+    fi
   fi
 
   log "creating package"
@@ -226,8 +230,6 @@ function main() {
       cp $KERNEL_UNLOAD_SCRIPT $KERNEL_SCRIPT_ROOT
       echo "$KERNEL_POSTINSTALL_UNLOAD_TEXT" >> $KERNEL_POSTINSTALL
       echo "$KERNEL_POSTINSTALL_AUTOSTART_TEXT" >> $KERNEL_POSTINSTALL
-      # Install the normal post install reload to reload daemons.
-      echo "$POSTINSTALL_AUTOSTART_TEXT" >> $KERNEL_POSTINSTALL
     fi
 
     log "creating kernel package"
